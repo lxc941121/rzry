@@ -1,0 +1,165 @@
+@charset "utf-8";
+html{font:14px/1.5 "微软雅黑";color:#333;}
+*{margin:0;padding:0;}
+a{color:#333;text-decoration:none;background:transparent;outline:none;}
+a:focus{outline:0}
+g{cursor:pointer;}
+/*a:hover{color: #0f8eed}*/
+ul,ol,li{list-style:none;}
+html,body{height:100%;width: 100%;position: relative;}
+
+/*修改weui*/
+.weui-tabbar__item.weui-bar__item_on .weui-tabbar__icon,
+.weui-tabbar__item.weui-bar__item_on .weui-tabbar__icon>i,
+.weui-tabbar__item.weui-bar__item_on .weui-tabbar__label,.weui-icon-success,.weui-vcode-btn,
+.weui-search-bar__cancel-btn{color:#0f8eed}
+.weui-tabbar__icon{width:auto !important;}
+.weui-media-box_appmsg{-webkit-box-align: start;-webkit-align-items:start;align-items: start;}
+.weui-navbar__item.weui-bar__item_on{background-color:#6acc1b;}
+.weui-navbar__item{background:#0092dd;color:#fff;}
+.weui-navbar{font-size: 18px;background: transparent;}
+.weui-navbar:after{border:none;}
+.weui-navbar .weui-navbar__item img{max-height:20px;vertical-align: text-bottom;margin-right:3px;}
+.weui-navbar .weui-navbar__item:first-child{border-radius: 10px 0 0 10px;}
+.weui-navbar .weui-navbar__item:last-child{border-radius: 0 10px 10px 0;}
+.weui-search-bar{background: none;padding: 0;margin-bottom: 15px;}
+.weui-search-bar:before{height:0;}
+.weui-search-bar:after{border:none;}
+.weui-cell_access.no-foot .weui-cell__ft{padding-right:0;}
+.weui-cell_access.no-foot .weui-cell__ft:after{display: none;}
+
+
+/*Swiper幻灯片*/
+.swiper-slide img{max-width: 100%;display: block;}
+#swiper2 .swiper-slide img,#swiper3 .swiper-slide img,.y-imglist-1_item img{border-radius: 10px 10px 0 0;max-width: 100%;display: block;}
+#swiper2 .swiper-slide div,#swiper3 .swiper-slide div,.y-imglist-1_item div{border-radius:  0 0 10px 10px;}
+.swiper2-tit,.y-imglist-1_item div{color:#fff;text-align: center;padding: 5px 0;
+    //background: url("btn1.png") no-repeat 95% center #34abf4;background-size:auto 15px;
+  }
+
+/*地图*/
+#map{height:100%;width: 100%;}
+
+/*通用*/
+[v-cloak]{opacity: 0;}
+.y-divide{height:1px;margin:10px;background:#eee;}
+.y-divide-s{height:1px;margin:5px;background:#eee;}
+.mt15{margin-top:15px !important;}
+.mt10{margin-top:10px !important; position: absolute;top: 58vh; background-color: white;width: 100%;}
+.mr0{margin-right: 0px !important;}
+.y-index,.y-container{margin:10px;}
+/*标签*/
+.y-tag{border:1px solid #2e3574;color:#2e3574;padding: 5px 8px;border-radius: 3px;text-align: center;display: inline-block}
+.y-tag_primary{border-color:#0f8eed;color:#0f8eed}
+.y-tag_success{border-color:#5ebe00;color:#5ebe00}
+.y-tag_warn{border-color:#e47b00;color:#e47b00}
+/*输入框*/
+.y-input{border-bottom: 1px solid #e6f5ff;overflow: hidden;display: flex;line-height:45px;font-size: 16px;margin-top:15px;}
+.y-input label{font-weight: bold;float: left;}
+.y-input input{border:none;float: right;text-align: right;flex: 1;font-size: 16px;outline: 0;}
+.y-textarea{overflow: hidden;font-size: 16px;margin-top:15px;}
+.y-textarea label{font-weight: bold;display: block;}
+.y-textarea textarea{border-radius: 5px;width: 89%;margin-top: 10px;height: 180px;border-color:#e3f4ff;
+    box-shadow: 0 0 10px #e3f4ff;outline: 0;font-size: 16px;padding:0% 5%;}
+/*按钮*/
+.y-btn{border-radius: 35px;line-height: 35px;text-align: center;margin:0 auto;font-size: 16px;}
+.y-btn-primary{background:#0f8eed;color:#fff}
+.y-btn-info{background:#34abf4;color:#fff;}
+/*标题*/
+.y-title{overflow: hidden;font-size: 16px;}
+.y-title > div{float:left;font-weight:bold;padding-left:10px;background: url("shu.jpg") no-repeat left center;background-size:auto 90%;}
+.y-title > a{float:right;color:#666;}
+/*面板*/
+.y-card{border-radius: 10px;border:1px solid #eee;box-shadow: #eee;padding: 10px;}
+
+/*动画*/
+@keyframes ymore {from {bottom:0px;opacity: 0} to {bottom:-20px;opacity: 1} }
+#ymore{animation:ymore 1.3s infinite;}
+
+/*首页*/
+.y-index-link{font-size: 12px;}
+.y-index-link img{width: 30px;}
+.y-index-link .weui-flex__item{border-right:1px solid #eee;text-align: center;}
+.y-index-link .weui-flex__item:last-child{border-right:none;}
+.y-index-link .weui-flex__item >div:nth-child(2){color:#000;font-size: 15px;font-weight: bold;}
+.y-index-link .weui-flex__item >div:nth-child(3){color:#666;font-size: 10px;}
+/*.y-index-link1{background: url("link1.png") no-repeat 90% center;background-size:auto 80%;}
+.y-index-link2{background: url("link2.png") no-repeat right center;background-size:auto 80%;}
+.y-index-link3{background: url("link3.png") no-repeat 90% center;background-size:auto 80%;}
+.y-index-link4{background: url("link4.png") no-repeat right center;background-size:auto 80%;}*/
+/*科普植物品种*/
+.y-imglist-1_item{float: left;width:45%;margin:0 2%;margin-bottom: 15px;}
+/*公园推荐*/
+.y-gytj{position: absolute;width:100%;bottom:50px;}
+.y-gytj .y-container > .y-wrap{background: #fff;border-radius:5px;padding: 10px;}
+/*公园详细*/
+.park-detail{}
+.park-detail_top{display: flex;background: #0f8eed;padding:10px;color:#fff;}
+.park-detail_top a{color:#fff;}
+.park-detail_top_tit{flex:1;font-weight: bold;font-size: 22px;}
+.park-detail-top_btn a{border:1px solid #fff;border-radius:10px;display: block;padding: 5px 15px;text-align: center;margin-bottom: 10px;}
+//.park-detail-top_btn a:nth-child(1){background: url("d-i1.png") no-repeat 10px center;background-size: auto 80%;text-indent: 10px;}
+//.park-detail-top_btn a:nth-child(2){background: url("d-i2.png") no-repeat 10px center;background-size: auto 80%;text-indent: 10px;}
+.park-detail_nav{display: flex;border-bottom: 1px solid #eee;}
+.park-detail-nav_item{text-align:center;color:#0f8eed;flex: 1;font-weight:bold;text-align: center;padding: 10px 0;font-size: 15px;}
+/*.park-detail-nav_item:nth-child(1){background: url("d-nav1.png") no-repeat 10px center;background-size:auto 40%;text-indent: 25px;}
+.park-detail-nav_item:nth-child(2){background: url("d-nav2.png") no-repeat 10px center;background-size:auto 38%;text-indent: 25px;}
+.park-detail-nav_item:nth-child(3){background: url("d-nav3.png") no-repeat 20px center;background-size:auto 38%;text-indent: 20px;}
+.park-detail-nav_item:nth-child(4){background: url("d-nav4.png") no-repeat 20px center;background-size:auto 38%;text-indent: 20px;}*/
+//.park-detail_nav_location{margin:1em;background:url("d-addr.png") no-repeat left center;background-size:auto 100%;text-indent: 1.8em;}
+.park-detail_info{padding:10px;border-top: 2px solid #eee}
+.park-detail_pic{display: flex;padding:10px;border-top:2px solid #eee;}
+.park-detail_pic_item{flex: 1;}
+.park-detail_pic_item img{width: 95%;display: block;}
+
+/*列表*/
+.y-gylist{border-top:1px solid #f1f1f1;max-height:20vh;overflow-y:scroll;}
+.y-gylist .weui-media-box{padding: 10px;}
+.y-gylist .weui-media-box__title{font-weight: bold;margin-bottom: 3px;font-size: 15px;}
+.y-gylist .weui-media-box__title span{float: right;font-weight: normal;color:#555;}
+/*搜索*/
+.y-search{border-radius: 33px;line-height: 33px;width: 100%;box-shadow: 0 0 5px #eee;background: #fff;position:relative;}
+.y-search input{border:none;text-indent: 4em;
+    //background: url("seach.gif") no-repeat 5% center;background-size:auto 80%;
+    line-height: 33px;width: 100%;outline:0;}
+.y-search a{
+  position: absolute;
+  right: 0;top: 0px;
+  text-align: center;
+  height: 100%;width: 48px;
+  background: #f5f5f5;
+  border-radius: 0 20px 20px 0;
+  background: #0f8eed;
+  color:#fff;
+}
+/*左侧周边*/
+.y-zhoubian{position: absolute;left:10px;top:-100px;background: #fff;border-radius: 3px;width:40px;z-index:99;}
+.y-zhoubian a{font-size:.5rem;display: block;text-align: center;padding-top:25px;}
+.y-zhoubian a.on{color: #0f8eed;box-shadow: 0 0 10px #0f8eed;}
+//.y-zhoubian a:nth-child(1){background: url("zb1.png") no-repeat center 5px;background-size:50% auto;}
+//.y-zhoubian a:nth-child(3){background: url("zb6.png") no-repeat center 5px;background-size:50% auto;}
+//.y-zhoubian a:nth-child(5){background: url("zb2.png") no-repeat center 5px;background-size:50% auto;}
+//.y-zhoubian a:nth-child(7){background: url("zb3.png") no-repeat center 5px;background-size:50% auto;}
+//.y-zhoubian a:nth-child(9){background: url("zb4.png") no-repeat center 5px;background-size:50% auto;}
+//.y-zhoubian a:nth-child(11){background: url("zb5.png") no-repeat center 5px;background-size:50% auto;}
+//.y-zhoubian a:nth-child(13){background: url("zb7.png") no-repeat center 5px;background-size:50% auto;}
+/*右侧导航*/
+.y-tools{position: absolute;right:10px;top:-100px;background: #fff;border-radius: 3px;width:40px;z-index:99;}
+.y-tools a{font-size:.5rem;display: block;text-align: center;padding-top:30px;}
+//.y-tools a:nth-child(1){background: url("map-i5.png") no-repeat center 5px;background-size:60% auto;}
+//.y-tools a:nth-child(3){background: url("map-i1.gif") no-repeat center 5px;background-size:60% auto;}
+//.y-tools a:nth-child(5){background: url("map-i6.png") no-repeat center 5px;background-size:60% auto;}
+//.y-tools a:nth-child(7){background: url("map-i3.gif") no-repeat center 5px;background-size:60% auto;}
+//.y-tools a:nth-child(9){background: url("map-i4.gif") no-repeat center 5px;background-size:50% auto;}
+/*个人中心*/
+.y-personal-head{position: relative;margin-bottom: 60px;}
+/*vr*/
+//.vrpage{background: url("vrbg2.jpg") no-repeat center top;background-size:auto 100%;padding: 5%;}
+.vr-list{overflow: hidden;}
+.vr-list_item{text-align: center;color:#fff;width: 47%;float: left;margin-right:6%;margin-top: 15px;}
+.vr-list_item img{display: block;max-width: 100%;}
+.vr-list_item > div{background: rgba(0,0,0,0.5);font-size: 14px;line-height: 35px;}
+
+.y-gylist::-webkit-scrollbar {
+  display: none;
+}

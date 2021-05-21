@@ -1,0 +1,35 @@
+* {
+  font-size: 14px;
+}
+a {
+  text-decoration: none;
+}
+ul {
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style: none;
+}
+* /deep/ .weui-input,* /deep/ .weui-textarea {
+  background-color: #f5f5f5;
+  padding: 7px 7px;
+  color: #000;
+}
+* /deep/ .vux-table td:before,
+.vux-table th:before {
+  border-bottom: none;
+}
+* /deep/ .vux-table:after {
+  border-top: none;
+}
+* /deep/ .weui-icon-success-circle,
+* /deep/ .weui-icon-circle {
+  font-size: 16px;
+}
+* /deep/ .weui-cell_select {
+  background-color: #f5f5f5;
+  margin-left: 15px;
+  border-radius: 4px;
+  height: 35px;
+}
