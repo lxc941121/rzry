@@ -1,0 +1,74 @@
+.floor {
+  width: 100%;
+  position: fixed;
+  height: 55px;
+  background-color: #fff;
+  bottom: 0px;
+  box-sizing: border-box;
+  padding-top: 10px;
+  z-index: 10;
+  // position: relative;
+
+  .flnav {
+    width: 22.5%;
+    height: 100%;
+    overflow: hidden;
+    float: left;
+
+    &:nth-child(4) {
+      width: 10%;
+    }
+
+    .navlink {
+      min-width: 40px;
+      overflow: hidden;
+      margin: 10px auto 0px;
+    }
+
+    .navicon {
+      display: block;
+      height: 20px;
+      width: 100%;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: auto 100%;
+    }
+
+    .navname {
+      height: 14px;
+      font-size: 10px;
+      line-height: 14px;
+      color: #333333;
+      opacity: 1;
+      text-align: center;
+      padding-top: 7px;
+    }
+  }
+
+  .floor_index {
+    position: absolute;
+    left: 50%;
+    top: -10px;
+    width: 62px;
+    height: 62px;
+    background: url(img/index/index_bg.png) no-repeat;
+    background-size: contain;
+    padding-top: 10px;
+    margin-left: -31px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  .foot_icon {
+    width: 22px;
+    margin: 0px auto;
+
+  }
+
+  .foot_txt {
+    color: #fff;
+    text-align: center;
+    font-size: 12px;
+  }
+}

@@ -3,8 +3,8 @@
 import Vue from "vue";
 import App from "./App";
 import router from "./router";
-
 import Axios from "axios";
+// import axios, { isDev } from './utils/axios-init'
 import VueCookies from "vue-cookies";
 
 import ElementUI from 'element-ui'
@@ -27,7 +27,7 @@ Vue.prototype.$utils = utils; // main.js中全局引入
 Vue.config.productionTip = false;
 
 /* 倒计时组件 */
-Vue.filter("filterTime", function(value) {
+Vue.filter("filterTime", function (value) {
   if (!value) {
     return "";
   }
@@ -65,7 +65,7 @@ Vue.filter("filterTime", function(value) {
 /* eslint-disable no-new */
 
 
-import {ToastPlugin, LoadingPlugin} from 'vux';
+import { ToastPlugin, LoadingPlugin } from 'vux';
 Vue.use(ToastPlugin);
 Vue.use(LoadingPlugin);
 

@@ -5,7 +5,7 @@
       <div class="person">
         <img :src="headimg" />
       </div>
-      <div class="text" >
+      <div class="text">
         <h3>{{name}}</h3>
         <p style="height:21px">
           <!-- 解锁树种：
@@ -15,28 +15,14 @@
       <div>
         <div class="btn_user" style="width:100%;position: relative;">
           <img src="../img/phone.png" class="icon">
-          <x-button
-            :gradients="['#fff', '#fff']"
-            class="btnPhone"
-            v-if="phonenum"
-            @click.native="Phone"
-          >{{phonenum}}</x-button>
-          <x-button
-            :gradients="['#fff', '#fff']"
-            class="btnPhone"
-            v-else
-            @click.native="Phone"
-          >绑定手机号</x-button>
+          <x-button :gradients="['#fff', '#fff']" class="btnPhone" v-if="phonenum" @click.native="Phone">{{phonenum}}</x-button>
+          <x-button :gradients="['#fff', '#fff']" class="btnPhone" v-else @click.native="Phone">绑定手机号</x-button>
         </div>
         <div class="btn_user" style="width:100%;position: relative;margin-top: 15px;">
-          <x-button
-            :gradients="['#fff', '#fff']"
-            class="btn"
-            link="/myRzry"
-          >我的认种认养</x-button>
-        </div>    
+          <x-button :gradients="['#fff', '#fff']" class="btn" link="/myRzry">我的认种认养</x-button>
+        </div>
       </div>
-     
+
       <div class="hz" style="box-sizing: border-box;padding:1% 0px;">
         <div class="jb">
           <img :src="require('../img/jb.png')" />
@@ -93,7 +79,7 @@ import bus from "../../assets/config/eventBus";
 import { XButton, Popover, Previewer, TransferDom, Scroller } from "vux";
 import rzrypop from "../personal/rzryPop/rzrypop";
 import PhoneDialog from "./phoneDialog";
-import {inde_url, url} from "../../assets/config/config";
+import { inde_url, url } from "../../assets/config/config";
 
 export default {
   directives: {
@@ -115,10 +101,10 @@ export default {
       timeValue: "2020",
       gypShow: true,
       IMGlist: [],
-      rylist:[],
-      phonenum:"",
-      treecount:0,
-      rank:0,
+      rylist: [],
+      phonenum: "",
+      treecount: 0,
+      rank: 0,
       zsList: [
         {
           id: 1,
@@ -164,22 +150,28 @@ export default {
     this.getphinfo();
   },
   methods: {
-    getphinfo(){
+    getphinfo() {
       const that = this;
-      that.$axios.post("/api/sys/yl/ranking/peranking",{
-        "nowPage": self.pageNum,
-        "pageSize": 20,
-        "key":""
-      },{
-        headers: {
-          "token":  window.sessionStorage.getItem('token')
-        }
-      }).then( res =>{
-        that.rank = res.data.myranking.ranked
-      })
+      that.$axios
+        .post(
+          "/api/sys/yl/ranking/peranking",
+          {
+            nowPage: self.pageNum,
+            pageSize: 20,
+            key: "",
+          },
+          {
+            headers: {
+              token: window.sessionStorage.getItem("token"),
+            },
+          }
+        )
+        .then((res) => {
+          that.rank = res.data.myranking.ranked;
+        });
     },
     lookZs(list) {
-      console.log(list.path)
+      console.log(list.path);
       let item = {
         src: list.path,
       };
@@ -197,24 +189,24 @@ export default {
       this.$axios
         .get(
           `/fapi/public/main/oauth?redirect_uri=${encodeURIComponent(
-            url+"/#/myRzry" //部署后需调整
+            url + "/#/myRzry" //部署后需调整
           )}&response_url=null`,
           {}
         )
         .then((res) => {
           console.log(res.data);
-          window.sessionStorage.setItem('res',res.data);//存入sessionStorage
+          window.sessionStorage.setItem("res", res.data); //存入sessionStorage
           //this.$cookies.set("res", res.data); //存入cookise
           window.location.href = res.data;
         });
     },
     persondata(cookie, fn) {
-      window.sessionStorage.setItem('code',this.$utils.getUrlKey("code"));
+      window.sessionStorage.setItem("code", this.$utils.getUrlKey("code"));
       // this.$cookies.set("code", this.$utils.getUrlKey("code"));
       // const code = this.$cookies.get("code");
       const that = this;
-      const code = window.sessionStorage.getItem('code');
-      console.log('code',code);
+      const code = window.sessionStorage.getItem("code");
+      console.log("code", code);
       this.$axios
         .get(`/fapi/public/main/invoke?code=${code}`, {})
         .then((res) => {
@@ -223,164 +215,180 @@ export default {
             fn && fn(false);
           } else {
             // console.log('res',res.data);
-            window.sessionStorage.setItem("token",res.data.wxscToken);
+            window.sessionStorage.setItem("token", res.data.wxscToken);
             // this.$cookies.set('token',res.data.wxscToken);
             const person = JSON.parse(res.data.userInfo); //用户全部信息
             that.headimg = person.headpic;
             that.name = person.nickname;
             console.log(person);
             console.log(JSON.parse(res.data.userInfo));
-            window.sessionStorage.setItem('person',res.data.userInfo);
+            window.sessionStorage.setItem("person", res.data.userInfo);
             //this.$cookies.set("person", person); //存入cookise
             fn && fn(true);
           }
         });
     },
 
-
-    
-
-    async getDataList(){
+    async getDataList() {
       const self = this;
-      await self.$axios.post("/api/sys/yl/ordertree/list", {
-        "nowPage": self.pageNum,
-        "pageSize": 10,
-        "key":""
-      }, {
-        headers: {
-          "token":  window.sessionStorage.getItem('token')
-        }
-      }).then(function (res) {
-        if (res.data.msg && res.data.msg.indexOf("未登录")!=-1){
-          window.sessionStorage.removeItem("person");
-          if (!window.sessionStorage.getItem("person")) {
-            // if (!this.$cookies.get("person")) {
-            let code = self.$utils.getUrlKey("code");
-            self.persondata(code, (boolean) => {
-              if (boolean) {
-                //  code..
-                console.log("成功了");
-                self.$utils.wxgetsign(self,wx);//获取wx.config
-              } else {
-                //  验证 跳转
-                self.wxAuthorization();
-              }
-            });
-          } else {
-            //  验证 跳转
-            const that = this;
-            console.log("已有cookie");
-            const person = JSON.parse(window.sessionStorage.getItem('person'))
-            self.headimg = person.headpic;
-            self.name = person.nickname;
-            // that.headimg = this.$cookies.get("person").headpic;
-            // that.name = this.$cookies.get("person").nickname;
-            self.$utils.wxgetsign(that, wx); //获取wx.config
-            //this.wxAuthorization();
+      await self.$axios
+        .post(
+          "/api/sys/yl/ordertree/list",
+          {
+            nowPage: self.pageNum,
+            pageSize: 10,
+            key: "",
+          },
+          {
+            headers: {
+              token: window.sessionStorage.getItem("token"),
+            },
           }
-        }
-        // console.log(self.format(res.data.datas.publish_date));
-        const orderlist = res.data.datas;
-        self.cjList.forEach((element)=>{
-          var param = orderlist.filter(function(item){
-            return item.tree_name == element.name
-          })
-          element.unlock = param.length>0?true:false;
-        })
-        self.treecount = self.cjList.filter(function(item){return item.unlock == true}).length;
-      });
+        )
+        .then(function (res) {
+          if (res.data.msg && res.data.msg.indexOf("未登录") != -1) {
+            window.sessionStorage.removeItem("person");
+            if (!window.sessionStorage.getItem("person")) {
+              // if (!this.$cookies.get("person")) {
+              let code = self.$utils.getUrlKey("code");
+              self.persondata(code, (boolean) => {
+                if (boolean) {
+                  //  code..
+                  console.log("成功了");
+                  self.$utils.wxgetsign(self, wx); //获取wx.config
+                } else {
+                  //  验证 跳转
+                  // self.wxAuthorization();
+                }
+              });
+            } else {
+              //  验证 跳转
+              const that = this;
+              console.log("已有cookie");
+              const person = JSON.parse(
+                window.sessionStorage.getItem("person")
+              );
+              self.headimg = person.headpic;
+              self.name = person.nickname;
+              // that.headimg = this.$cookies.get("person").headpic;
+              // that.name = this.$cookies.get("person").nickname;
+              self.$utils.wxgetsign(that, wx); //获取wx.config
+              //this.wxAuthorization();
+            }
+          }
+          // console.log(self.format(res.data.datas.publish_date));
+          const orderlist = res.data.datas;
+          self.cjList.forEach((element) => {
+            var param = orderlist.filter(function (item) {
+              return item.tree_name == element.name;
+            });
+            element.unlock = param.length > 0 ? true : false;
+          });
+          self.treecount = self.cjList.filter(function (item) {
+            return item.unlock == true;
+          }).length;
+        });
     },
 
-
-    getrylist(){
+    getrylist() {
       const self = this;
-      self.$axios.post("/api/sys/yl/cert/list", {
-        "nowPage": 1,
-        "pageSize": 20,
-        "key":""
-      }, {
-        headers: {
-          "token":  window.sessionStorage.getItem('token')
-        }
-      }).then(function (res) {
-        if (res.data.msg && res.data.msg.indexOf("未登录")!=-1){
-          window.sessionStorage.removeItem("person");
-          if (!window.sessionStorage.getItem("person")) {
-            // if (!this.$cookies.get("person")) {
-            let code = self.$utils.getUrlKey("code");
-            self.persondata(code, (boolean) => {
-              if (boolean) {
-                //  code..
-                console.log("成功了");
-                self.$utils.wxgetsign(self,wx);//获取wx.config
-              } else {
-                //  验证 跳转
-                self.wxAuthorization();
-              }
-            });
-          } else {
-            //  验证 跳转
-            const that = this;
-            console.log("已有cookie");
-            const person = JSON.parse(window.sessionStorage.getItem('person'))
-            self.headimg = person.headpic;
-            self.name = person.nickname;
-            // that.headimg = this.$cookies.get("person").headpic;
-            // that.name = this.$cookies.get("person").nickname;
-            self.$utils.wxgetsign(that, wx); //获取wx.config
-            //this.wxAuthorization();
+      self.$axios
+        .post(
+          "/api/sys/yl/cert/list",
+          {
+            nowPage: 1,
+            pageSize: 20,
+            key: "",
+          },
+          {
+            headers: {
+              token: window.sessionStorage.getItem("token"),
+            },
           }
-        }
-        self.rylist = res.data.datas;
-             
-      });
+        )
+        .then(function (res) {
+          if (res.data.msg && res.data.msg.indexOf("未登录") != -1) {
+            window.sessionStorage.removeItem("person");
+            if (!window.sessionStorage.getItem("person")) {
+              // if (!this.$cookies.get("person")) {
+              let code = self.$utils.getUrlKey("code");
+              self.persondata(code, (boolean) => {
+                if (boolean) {
+                  //  code..
+                  console.log("成功了");
+                  self.$utils.wxgetsign(self, wx); //获取wx.config
+                } else {
+                  //  验证 跳转
+                  // self.wxAuthorization();
+                }
+              });
+            } else {
+              //  验证 跳转
+              const that = this;
+              console.log("已有cookie");
+              const person = JSON.parse(
+                window.sessionStorage.getItem("person")
+              );
+              self.headimg = person.headpic;
+              self.name = person.nickname;
+              // that.headimg = this.$cookies.get("person").headpic;
+              // that.name = this.$cookies.get("person").nickname;
+              self.$utils.wxgetsign(that, wx); //获取wx.config
+              //this.wxAuthorization();
+            }
+          }
+          self.rylist = res.data.datas;
+        });
     },
 
     getRouterData() {
       const self = this;
-      self.$axios.post("/api/sys/yl/user/userInfo","",{
-        headers: {
-          "token":  window.sessionStorage.getItem('token')
-        }
-      }).then( res =>{
-        self.headimg = self.$route.query.headimg;
-        self.name = self.$route.query.name;
-        if (res.data.msg && res.data.msg.indexOf("未登录")!=-1){
-          window.sessionStorage.removeItem("person");
-          if (!window.sessionStorage.getItem("person")) {
-            // if (!this.$cookies.get("person")) {
-            let code = self.$utils.getUrlKey("code");
-            self.persondata(code, (boolean) => {
-              if (boolean) {
-                //  code..
-                console.log("成功了");
-                self.$utils.wxgetsign(self,wx);//获取wx.config
-              } else {
-                //  验证 跳转
-                self.wxAuthorization();
-              }
-            });
-          } else {
-            //  验证 跳转
-            const person = JSON.parse(window.sessionStorage.getItem('person'))
-            self.headimg = person.headpic;
-            self.name = person.nickname;
-            // that.headimg = this.$cookies.get("person").headpic;
-            // that.name = this.$cookies.get("person").nickname;
-            self.$utils.wxgetsign(that, wx); //获取wx.config
-            //this.wxAuthorization();
+      self.$axios
+        .post("/api/sys/yl/user/userInfo", "", {
+          headers: {
+            token: window.sessionStorage.getItem("token"),
+          },
+        })
+        .then((res) => {
+          self.headimg = self.$route.query.headimg;
+          self.name = self.$route.query.name;
+          if (res.data.msg && res.data.msg.indexOf("未登录") != -1) {
+            window.sessionStorage.removeItem("person");
+            if (!window.sessionStorage.getItem("person")) {
+              // if (!this.$cookies.get("person")) {
+              let code = self.$utils.getUrlKey("code");
+              self.persondata(code, (boolean) => {
+                if (boolean) {
+                  //  code..
+                  console.log("成功了");
+                  self.$utils.wxgetsign(self, wx); //获取wx.config
+                } else {
+                  //  验证 跳转
+                  // self.wxAuthorization();
+                }
+              });
+            } else {
+              //  验证 跳转
+              const person = JSON.parse(
+                window.sessionStorage.getItem("person")
+              );
+              self.headimg = person.headpic;
+              self.name = person.nickname;
+              // that.headimg = this.$cookies.get("person").headpic;
+              // that.name = this.$cookies.get("person").nickname;
+              self.$utils.wxgetsign(that, wx); //获取wx.config
+              //this.wxAuthorization();
+            }
           }
-        }
-        self.phonenum = res.data.data.phone
-        // debugger
-        console.log(res);
-      })    
-
+          self.phonenum = res.data.data.phone;
+          // debugger
+          console.log(res);
+        });
     },
-    Phone(){
+    Phone() {
       // this.$refs.phoneDialog.phoneShow = true;
       bus.$emit("bangDingPhone");
-    }
+    },
   },
 };
 </script>
@@ -415,19 +423,19 @@ export default {
         width: 102px;
         // margin: auto;
         display: block;
-        margin-left:0px;
+        margin-left: 0px;
         // position: absolute;
         // top: 47%;
         // right: 2%;
       }
-      .btnPhone{
+      .btnPhone {
         font-size: 12px;
         color: #28ce84 !important;
         border-radius: 20px;
         width: 102px;
         //margin: auto;
         display: block;
-        margin-left:0px;
+        margin-left: 0px;
         // position: absolute;
         // top: 6vh;
         // left: 24vh;
@@ -467,7 +475,7 @@ export default {
         background-color: #27ce84;
         position: relative;
         padding: 5px 10px;
-        margin-right:30px;
+        margin-right: 30px;
       }
       .nl {
         width: 120px;
@@ -477,7 +485,7 @@ export default {
         padding: 5px 10px;
       }
     }
-    .icon{
+    .icon {
       width: 2.5vh;
       height: 3.5vh;
       position: absolute;
@@ -535,6 +543,5 @@ export default {
       background-position: center;
     }
   }
-
 }
 </style>
