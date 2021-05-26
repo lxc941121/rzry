@@ -78,7 +78,7 @@ export default new VueRouter({
       path: "/yhjl",
       name: "上传记录",
       component: resolve =>
-      require(["@/components/upload/upload.vue"], resolve)
+        require(["@/components/upload/upload.vue"], resolve)
     },
     // {
     //   path: "/infoConfirm",
@@ -150,6 +150,24 @@ export default new VueRouter({
       name: "分享",
       component: resolve =>
         require(["@/components/share/share.vue"], resolve)
+    },
+    {
+      path: "/declare",
+      name: "申报",
+      component: resolve =>
+        require(["@/components/index/declare.vue"], resolve)
+    },
+    {
+      path: "/declare_progress",
+      name: "申报进度查询页",
+      component: resolve =>
+        require(["@/components/index/declare_progress.vue"], resolve)
+    },
+    {
+      path: "/declare_personal",
+      name: "需求单位/个人申报",
+      component: resolve =>
+        require(["@/components/index/declare_personal.vue"], resolve)
     }
   ],
   //mode: "history"
