@@ -168,6 +168,24 @@ export default new VueRouter({
       name: "需求单位/个人申报",
       component: resolve =>
         require(["@/components/index/declare_personal.vue"], resolve)
+    },
+    {
+      path: "/declare_owner",
+      name: "业主单位申报",
+      component: resolve =>
+        require(["@/components/index/declare_owner.vue"], resolve)
+    },
+    {
+      path: "/go_custody",
+      name: "去监护",
+      component: resolve =>
+        require(["@/components/index/go_custody.vue"], resolve)
+    },
+    {
+      path: "/submit_custody",
+      name: "提交申请",
+      component: resolve =>
+        require(["@/components/index/submit_custody.vue"], resolve)
     }
   ],
   //mode: "history"

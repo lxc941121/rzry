@@ -41,12 +41,24 @@ export default {
         //   backgroundimage: require("@/style/img/index/shop.png"),
         // },
         {
-          page: "cj",
+          page: "/cj",
           name: "个人中心",
           backgroundimage: require("@/style/img/index/foot4.png"),
         },
       ],
     };
+  },
+  methods: {
+    cjrouteto(page) {
+      const person = JSON.parse(window.sessionStorage.getItem("person"));
+      this.$router.push({
+        path: "/" + page,
+        // query: {
+        //   headimg: person.headpic,
+        //   name: person.nickname,
+        // },
+      });
+    },
   },
 };
 </script>

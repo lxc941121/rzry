@@ -15,6 +15,7 @@
     "esri-loader": "^2.15.0",
     "less": "^3.9",
     "less-loader": "^5.0.0",
+    "vant": "^2.12.20",
     "vconsole": "^3.3.4",
     "vue": "^2.5.2",
     "vue-awesome-swiper": "^3.1.3",

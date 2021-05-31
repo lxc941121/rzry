@@ -3,7 +3,7 @@
     <div v-wechat-title="$route.name?$route.name:'城市数林公众服务平台'"></div>
     <!-- <router-link to="../components/rzry/index">Page1</router-link> -->
     <router-view />
-    <div class="backhome" @click="tohome()"></div>
+    <!-- <div class="backhome" @click="tohome()"></div> -->
   </div>
 </template>
 
@@ -152,17 +152,17 @@ export default {
 </style>
 <style lang="less">
 html {
-  height: 100%;
+  // height: 100%;
 }
 body {
-  height: 100%;
+  // height: 100%;
   margin: 0;
   padding: 0;
 }
 
 #app {
   width: 100%;
-  height: 100%;
+  // height: 100%;
   margin: 0;
   padding: 0;
 

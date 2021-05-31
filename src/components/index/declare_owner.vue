@@ -22,12 +22,24 @@
       <div class="per_send">发送验证码</div>
     </div>
     <div class="perline">
-      <span class="per_txt">需求地点</span>
+      <span class="per_txt">场地地点</span>
       <div class="per_input"><input type="text" placeholder="请填写您的地点"></div>
     </div>
     <div class="perline">
-      <span class="per_txt">需求数量</span>
+      <span class="per_txt">树种</span>
+      <div class="per_input"><input type="text" placeholder="请填写您的树种"></div>
+    </div>
+    <div class="perline">
+      <span class="per_txt">数量</span>
       <van-stepper v-model="saplingNum" />
+    </div>
+    <div class="perline">
+      <span class="per_txt">年限</span>
+      <van-stepper v-model="years" />
+    </div>
+    <div class="perline">
+      <span class="per_txt">价格</span>
+      <div class="per_input"><input type="text" placeholder="请填写您的价格"></div>
     </div>
     <div class="perline">
       <span class="per_txt">期望开始时间</span>
@@ -56,7 +68,8 @@ export default {
   data() {
     return {
       radio: "1",
-      saplingNum: 1,
+      saplingNum: 100,
+      years: 1,
       show: false,
       datetime: "",
       minDate: new Date(2020, 0, 1),

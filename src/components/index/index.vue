@@ -424,6 +424,8 @@ export default {
       });
     },
     wxAuthorization() {
+      return;
+
       this.$axios
         .get(
           `/fapi/public/main/oauth?redirect_uri=${encodeURIComponent(

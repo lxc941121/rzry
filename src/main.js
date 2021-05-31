@@ -6,6 +6,8 @@ import router from "./router";
 import Axios from "axios";
 // import axios, { isDev } from './utils/axios-init'
 import VueCookies from "vue-cookies";
+import Vant from 'vant';
+import 'vant/lib/index.css';
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
@@ -14,6 +16,7 @@ Vue.use(ElementUI)
 
 Vue.use(require("vue-wechat-title"));
 Vue.use(VueCookies);
+Vue.use(Vant);
 Vue.config.productionTip = false;
 
 // 不需要每次都 import一下 axios了，直接使用 $axios 即可
