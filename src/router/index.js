@@ -206,10 +206,10 @@ export default new VueRouter({
         require(["@/components/index/submit_custody.vue"], resolve)
     },
     {
-      path: "/exam",
-      name: "提交申请",
+      path: "/treesList",
+      name: "古树名木列表",
       component: resolve =>
-        require(["@/components/index/exam.vue"], resolve)
+        require(["@/components/index/treesList.vue"], resolve)
     }
   ],
   //mode: "history"

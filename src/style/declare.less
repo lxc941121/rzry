@@ -633,3 +633,150 @@
     }
   }
 }
+
+//古树名木列表
+.treesList {
+  .main {
+    border-radius: 0 20px 0 0;
+    background-color: #fff;
+    z-index: 4;
+    position: absolute;
+    top: 86px;
+  }
+
+  .search {
+    padding: 17px 10px 0 17px;
+    display: flex;
+
+
+    .inputKey {
+      background: #f5f5f5;
+      border-radius: 15px;
+      height: 30px;
+      width: 207px;
+      line-height: 30px;
+      font-size: 12px;
+      display: flex;
+      padding: 0 10px;
+      margin-right: 20px;
+    }
+
+    input {
+      flex: 1;
+    }
+
+    .btn {
+      width: 16px;
+      background: url(img/other/search.png)no-repeat;
+      height: 16px;
+      margin-top: 6px;
+      background-size: contain;
+
+
+
+    }
+
+    .select {
+      background: #f5f5f5;
+      border-radius: 15px;
+      height: 30px;
+      flex: 1;
+      float: right;
+      display: flex;
+      line-height: 30px;
+
+
+    }
+
+    .select_one {
+      font-size: 12px;
+
+      background-color: #f5f5f5;
+      flex: 1;
+      text-align: center;
+      border-radius: 15px;
+      color: #999999;
+
+      &.active {
+        background-color: #28CE84;
+        color: #FAFAFA;
+      }
+    }
+  }
+
+  .tree {
+    padding: 10px;
+  }
+
+  .tree_ul {
+    width: 100%;
+  }
+
+  .tree_li {
+    width: 50%;
+    float: left;
+    position: relative;
+    margin-bottom: 10px;
+
+    &:nth-child(2n+1) {
+      padding-right: 5px;
+
+    }
+
+    &:nth-child(2n) {
+      padding-left: 5px;
+
+      .tree_sn1 {
+        left: 5px;
+      }
+
+    }
+
+    img {
+      width: 100%;
+    }
+
+  }
+
+  .tree_border {
+    border: 1px solid #28CE84;
+  }
+
+  .tree_sn1 {
+    color: #FAFAFA;
+    font-size: 10px;
+    height: 14px;
+    line-height: 14px;
+    background: #FDA422;
+    border-radius: 0 9px 9px 0;
+    margin-top: -14px;
+    position: absolute;
+    left: 0;
+    right: 16px;
+    padding-left: 6px;
+  }
+
+  .tree_sn2 {
+    color: #333333;
+    font-size: 9px;
+    padding-left: 6px;
+
+  }
+
+  .tree_btm {
+    min-height: 30px;
+    padding: 3px 0px;
+  }
+
+  .tree_full {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: url(img/other/treebg3.png) no-repeat;
+    color: #fff;
+    background-size: contain;
+    font-size: 9px;
+    line-height: 17px;
+    padding: 0 6px 0 10px;
+  }
+}
