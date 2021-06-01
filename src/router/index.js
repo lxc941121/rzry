@@ -176,16 +176,40 @@ export default new VueRouter({
         require(["@/components/index/declare_owner.vue"], resolve)
     },
     {
+      path: "/declare_status",
+      name: "申报情况",
+      component: resolve =>
+        require(["@/components/index/declare_status.vue"], resolve)
+    },
+    {
+      path: "/water_record",
+      name: "浇水记录",
+      component: resolve =>
+        require(["@/components/index/water_record.vue"], resolve)
+    },
+    {
       path: "/go_custody",
       name: "去监护",
       component: resolve =>
         require(["@/components/index/go_custody.vue"], resolve)
     },
     {
+      path: "/custody_detail",
+      name: "监护详情",
+      component: resolve =>
+        require(["@/components/index/custody_detail.vue"], resolve)
+    },
+    {
       path: "/submit_custody",
       name: "提交申请",
       component: resolve =>
         require(["@/components/index/submit_custody.vue"], resolve)
+    },
+    {
+      path: "/exam",
+      name: "提交申请",
+      component: resolve =>
+        require(["@/components/index/exam.vue"], resolve)
     }
   ],
   //mode: "history"
