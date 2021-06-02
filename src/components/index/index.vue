@@ -485,7 +485,7 @@ export default {
         {},
         {
           headers: {
-            token: window.sessionStorage.getItem("token"),
+            // token: window.sessionStorage.getItem("token"),
           },
         }
       )

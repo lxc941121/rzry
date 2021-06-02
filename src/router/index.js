@@ -210,6 +210,12 @@ export default new VueRouter({
       name: "古树名木列表",
       component: resolve =>
         require(["@/components/index/treesList.vue"], resolve)
+    },
+    {
+      path: "/watering",
+      name: "浇水",
+      component: resolve =>
+        require(["@/components/index/watering.vue"], resolve)
     }
   ],
   //mode: "history"

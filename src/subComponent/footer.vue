@@ -41,7 +41,7 @@ export default {
         //   backgroundimage: require("@/style/img/index/shop.png"),
         // },
         {
-          page: "/cj",
+          page: "cj",
           name: "个人中心",
           backgroundimage: require("@/style/img/index/foot4.png"),
         },
