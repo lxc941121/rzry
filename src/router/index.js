@@ -6,6 +6,7 @@ import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
 export default new VueRouter({
+  mode: 'history',
   routes: [
     {
       path: "/",
@@ -216,7 +217,11 @@ export default new VueRouter({
       name: "浇水",
       component: resolve =>
         require(["@/components/index/watering.vue"], resolve)
-    }
+    },
+    {
+      path: '*',
+      redirect: "/"
+    },
   ],
   //mode: "history"
 });

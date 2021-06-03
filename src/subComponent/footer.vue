@@ -21,7 +21,7 @@ export default {
           backgroundimage: require("@/style/img/index/foot1.png"),
         },
         {
-          page: "myRzry",
+          page: "treesList",
           name: "古树名木监护",
           backgroundimage: require("@/style/img/index/foot2.png"),
         },

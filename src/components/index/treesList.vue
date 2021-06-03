@@ -9,7 +9,7 @@
         </div>
         <div class="select">
           <div class="select_one active">距离</div>
-          <div class="select_one">树种</div>
+          <div class="select_one">编号</div>
         </div>
       </div>
       <div class="tree">
