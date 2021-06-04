@@ -141,6 +141,9 @@ export default {
   //   //   }
   //   // });
   // },
+  created() {
+    window.sessionStorage.setItem("token", "DSJY@123");
+  },
   mounted() {
     const that = this;
   },

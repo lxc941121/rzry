@@ -2,7 +2,7 @@
   <div class="floor">
     <div class="floor_index">
       <div class="foot_icon"><img src="@/style/img/index/foot_index.png" alt=""></div>
-      <div class="foot_txt">首页</div>
+      <div class="foot_txt" @click="cjrouteto('')">首页</div>
     </div>
     <div class="flnav" v-for="(item,index) in navlist" :key="index" @click="cjrouteto(item.page)">
       <div class="navicon" :style="{backgroundImage: 'url(' + item.backgroundimage + ')'}"></div>
@@ -16,7 +16,7 @@ export default {
     return {
       navlist: [
         {
-          page: "index",
+          page: "declare",
           name: "种养需求申报",
           backgroundimage: require("@/style/img/index/foot1.png"),
         },
@@ -31,7 +31,7 @@ export default {
           backgroundimage: require("@/style/img/index/index_bg.png"),
         },
         {
-          page: "myRzry",
+          page: "yhjl",
           name: "养护记录上传",
           backgroundimage: require("@/style/img/index/foot3.png"),
         },
@@ -62,3 +62,8 @@ export default {
   },
 };
 </script>
+<style>
+.floor .foot_icon img {
+  width: 100%;
+}
+</style>

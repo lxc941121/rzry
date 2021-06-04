@@ -41,6 +41,47 @@
       </div>
 
     </div>
+    <div class="water_bk">
+      <div class="time">05-23</div>
+      <div class="water_area">
+        <div class="water_top"><img src="@/style/img/other/kettle.png" alt="">
+          <span>今日共获得60g</span>
+        </div>
+        <div class="water_main">
+          <div class="wt_top">
+            <img src="@/style/img/other/head.png" alt="" class="headimg">
+            <div class="wt_line">
+              <div class="wt_all">黄必胜等5位好友 帮你浇水50g</div>
+              <div class="wt_zk" @click="show = !show">{{show?'展开':'收起'}}</div>
+              <img src="@/style/img/other/gomore.png" alt="" :class="{'dropicon':show,'dropicon wt_drop':!show}">
+            </div>
+
+          </div>
+          <transition name="fade">
+            <ul class="wt_ul" v-if="show">
+              <li class="wt_li">
+                <img src="@/style/img/other/head.png" alt="" class="headimg">
+                <span class="wt_sn1">黄必胜 帮你浇水10g</span>
+                <div class="wt_sn2">拜访</div>
+              </li>
+              <li class="wt_li">
+                <img src="@/style/img/other/head.png" alt="" class="headimg">
+                <span class="wt_sn1">黄必胜 帮你浇水10g</span>
+                <div class="wt_sn2">拜访</div>
+              </li>
+              <li class="wt_li">
+                <img src="@/style/img/other/head.png" alt="" class="headimg">
+                <span class="wt_sn1">黄必胜 帮你浇水10g</span>
+                <div class="wt_sn2">拜访</div>
+              </li>
+
+            </ul>
+          </transition>
+        </div>
+
+      </div>
+
+    </div>
 
   </div>
 </template>

@@ -60,7 +60,7 @@
         </div>
       </div>
       <div class="navitem">
-        <div class="navbox" @click="routeto('map')">
+        <div class="navbox">
           <img src="@/style/img/index/shop_icon.png">
           <span>商城</span>
         </div>
@@ -68,7 +68,7 @@
     </div>
     <!-- 我的认种认养历史 -->
     <div class="gray_line"></div>
-    <div class="index_history">
+    <div class="index_history" @click="routeto('rzlist')">
       <div class="his_bar">我的认种认养历史</div>
       <div class="no_his"><img src="@/style/img/index/no_rz.png" alt="">
         <div class="rz_btn">立即领养</div>
@@ -77,7 +77,7 @@
 
     <!-- 虚拟养护 -->
     <div class="gray_line"></div>
-    <div class="index_history">
+    <div class="index_history" @click="handleGoA('watering')">
       <div class="his_bar his_bar2">虚拟养护</div>
       <div class="no_his"><img src="@/style/img/index/wlq.png" alt="">
         <div class="rz_btn rz_btn2">立即领取种子</div>
@@ -424,8 +424,6 @@ export default {
       });
     },
     wxAuthorization() {
-      return;
-
       this.$axios
         .get(
           `/fapi/public/main/oauth?redirect_uri=${encodeURIComponent(
@@ -474,6 +472,11 @@ export default {
             fn && fn(true);
           }
         });
+    },
+    handleGoA(Obj) {
+      this.$router.push({
+        path: "/" + Obj,
+      });
     },
   },
   mounted() {

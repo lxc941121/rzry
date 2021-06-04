@@ -56,7 +56,7 @@
       <div class="per_tip">
         <img src="@/style/img/other/small_icon2.png" alt=""> 为更好服务项目实行，建议开始时间选择至少三个月后。
       </div>
-      <div class="per_btn">提交申报申请</div>
+      <div class="per_btn" @click="handleGoA('declare_progress')">提交申报申请</div>
     </div>
 
   </div>
@@ -112,6 +112,11 @@ export default {
     },
     onCancel() {
       this.show = false;
+    },
+    handleGoA(Obj) {
+      this.$router.push({
+        path: "/" + Obj,
+      });
     },
   },
 };

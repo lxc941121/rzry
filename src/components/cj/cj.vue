@@ -1,76 +1,80 @@
 <template>
-  <div id="cj">
-    <!-- 头部背景颜色 -->
-    <div class="titleDiv">
-      <div class="person">
-        <img :src="headimg" />
-      </div>
-      <div class="text">
-        <h3>{{name}}</h3>
-        <p style="height:21px">
-          <!-- 解锁树种：
+  <div>
+    <div id="cj">
+      <!-- 头部背景颜色 -->
+      <div class="titleDiv">
+        <div class="person">
+          <img :src="headimg" />
+        </div>
+        <div class="text">
+          <h3>{{name}}</h3>
+          <p style="height:21px">
+            <!-- 解锁树种：
           <span>{{treecount}}</span> -->
-        </p>
-      </div>
-      <div>
-        <div class="btn_user" style="width:100%;position: relative;">
-          <img src="../img/phone.png" class="icon">
-          <x-button :gradients="['#fff', '#fff']" class="btnPhone" v-if="phonenum" @click.native="Phone">{{phonenum}}</x-button>
-          <x-button :gradients="['#fff', '#fff']" class="btnPhone" v-else @click.native="Phone">绑定手机号</x-button>
+          </p>
         </div>
-        <div class="btn_user" style="width:100%;position: relative;margin-top: 15px;">
-          <x-button :gradients="['#fff', '#fff']" class="btn" link="/myRzry">我的认种认养</x-button>
+        <div>
+          <div class="btn_user" style="width:100%;position: relative;">
+            <img src="../img/phone.png" class="icon">
+            <x-button :gradients="['#fff', '#fff']" class="btnPhone" v-if="phonenum" @click.native="Phone">{{phonenum}}</x-button>
+            <x-button :gradients="['#fff', '#fff']" class="btnPhone" v-else @click.native="Phone">绑定手机号</x-button>
+          </div>
+          <div class="btn_user" style="width:100%;position: relative;margin-top: 15px;">
+            <x-button :gradients="['#fff', '#fff']" class="btn" link="/myRzry">我的认种认养</x-button>
+          </div>
         </div>
-      </div>
 
-      <div class="hz" style="box-sizing: border-box;padding:1% 0px;">
-        <div class="jb">
-          <img :src="require('../img/jb.png')" />
-          排名：{{rank}}
-        </div>
-        <div class="nl">
-          <img :src="require('../img/nl.png')" />
-          绿色能量：0
+        <div class="hz" style="box-sizing: border-box;padding:1% 0px;">
+          <div class="jb">
+            <img :src="require('../img/jb.png')" />
+            排名：{{rank}}
+          </div>
+          <div class="nl">
+            <img :src="require('../img/nl.png')" />
+            绿色能量：0
+          </div>
         </div>
       </div>
+      <!-- 标题 -->
+      <div class="title">
+        <img :src="require('../img/xqx.png')" style="left: 10px;" />
+        <h3>我的证书</h3>
+        <img :src="require('../img/xqx.png')" class="imgborder" />
+      </div>
+      <!-- 列表 -->
+      <div style="box-sizing: border-box;padding:0 15px;overflow:hidden">
+        <scroller lock-y scrollbar-x style="width:1oo%">
+          <ul class="hzlist" style="overflow:hidden;margin:15px 0px" :style="{width:(rylist.length*33.33)+'%'}">
+            <li v-for="item in rylist" :key="item.id" @click="lookZs(item)" style="margin:0px" :style="{width:(100/rylist.length)+'%'}">
+              <img :src="item.path" />
+              <!-- <div class="text">芙蓉树</div> -->
+            </li>
+          </ul>
+        </scroller>
+      </div>
+      <div v-transfer-dom>
+        <previewer :list="IMGlist" ref="previewer"></previewer>
+      </div>
+      <!-- 标题 -->
+      <div class="title">
+        <img :src="require('../img/xqx.png')" style="left: 10px;" />
+        <h3>已解锁树种</h3>
+        <img :src="require('../img/xqx.png')" class="imgborder" />
+      </div>
+      <!-- 列表 -->
+      <ul class="hzlist">
+        <li v-for="i in cjList" :key="i.id">
+          <img v-if="i.unlock==true" :src="require('../img/'+i.name+'.png')" />
+          <img v-if="i.unlock==false" :src="require('../img/'+i.name+'2.png')" />
+        </li>
+      </ul>
+      <!-- 绑定手机号-->
+      <phoneDialog />
+      <!-- 弹框 -->
+      <rzrypop></rzrypop>
+
     </div>
-    <!-- 标题 -->
-    <div class="title">
-      <img :src="require('../img/xqx.png')" style="left: 10px;" />
-      <h3>我的证书</h3>
-      <img :src="require('../img/xqx.png')" class="imgborder" />
-    </div>
-    <!-- 列表 -->
-    <div style="box-sizing: border-box;padding:0 15px;overflow:hidden">
-      <scroller lock-y scrollbar-x style="width:1oo%">
-        <ul class="hzlist" style="overflow:hidden;margin:15px 0px" :style="{width:(rylist.length*33.33)+'%'}">
-          <li v-for="item in rylist" :key="item.id" @click="lookZs(item)" style="margin:0px" :style="{width:(100/rylist.length)+'%'}">
-            <img :src="item.path" />
-            <!-- <div class="text">芙蓉树</div> -->
-          </li>
-        </ul>
-      </scroller>
-    </div>
-    <div v-transfer-dom>
-      <previewer :list="IMGlist" ref="previewer"></previewer>
-    </div>
-    <!-- 标题 -->
-    <!-- <div class="title">
-      <img :src="require('../img/xqx.png')" style="left: 10px;" />
-      <h3>我的解锁</h3>
-      <img :src="require('../img/xqx.png')" class="imgborder" />
-    </div> -->
-    <!-- 列表 -->
-    <!-- <ul class="hzlist">
-      <li v-for="i in cjList" :key="i.id">
-        <img v-if="i.unlock==true" :src="require('../img/'+i.name+'.png')" />
-        <img v-if="i.unlock==false" :src="require('../img/'+i.name+'2.png')" />
-      </li>
-    </ul> -->
-    <!-- 绑定手机号-->
-    <phoneDialog />
-    <!-- 弹框 -->
-    <rzrypop></rzrypop>
+    <footer-bar />
   </div>
 </template>
 
@@ -80,6 +84,7 @@ import { XButton, Popover, Previewer, TransferDom, Scroller } from "vux";
 import rzrypop from "../personal/rzryPop/rzrypop";
 import PhoneDialog from "./phoneDialog";
 import { inde_url, url } from "../../assets/config/config";
+import footerBar from "@/subComponent/footer";
 
 export default {
   directives: {
@@ -93,6 +98,7 @@ export default {
     TransferDom,
     Scroller,
     rzrypop,
+    footerBar,
   },
   data() {
     return {

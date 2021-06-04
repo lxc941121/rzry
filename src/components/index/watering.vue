@@ -20,10 +20,10 @@
         <div class="water_info"><img src="@/style/img/other/water_success.png" alt=""></div>
         <div class="main_lf"><img src="@/style/img/other/water_lf.png" alt=""></div>
         <div class="main_rg"><img src="@/style/img/other/water_rg.png" alt=""></div>
-        <div class="main_one">
+        <div class="main_one" @click="handleGoA('share')">
           <img src="@/style/img/other/waterbtn1.png" alt="">
         </div>
-        <div class="main_two">
+        <div class="main_two" @click="handleGoA('water_record')">
           <img src="@/style/img/other/waterbtn2.png" alt="">
         </div>
         <div class="main_three">
@@ -118,8 +118,15 @@
 export default {
   data() {
     return {
-      show: true,
+      show: false,
     };
+  },
+  methods: {
+    handleGoA(Obj) {
+      this.$router.push({
+        path: "/" + Obj,
+      });
+    },
   },
 };
 </script>

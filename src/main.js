@@ -8,9 +8,12 @@ import Axios from "axios";
 import VueCookies from "vue-cookies";
 import Vant from 'vant';
 import 'vant/lib/index.css';
-
+import './utils/rem'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
 
 Vue.use(ElementUI)
 

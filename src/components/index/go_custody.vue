@@ -68,7 +68,7 @@
         <div class="per_tip per_tip2">
           <img src="@/style/img/other/small_icon2.png" alt=""> 监护须知：通过点击阅读并勾选此须知，自愿成为古树名木的监护人，在监护期内每年不少于6次实施监护义务，每次间隔不少于1个月，监护后须向城市数林公众服务平台上传古树名木最新状态，如有养护不到位，古树濒临死亡等问题需在上传时注明。如因监护人监护不到位导致的古树名木最终死亡，将取消后续监护资格。
         </div>
-        <div class="per_btn">提交监护申请</div>
+        <div class="per_btn" @click="handleGoA('submit_custody')">提交监护申请</div>
       </div>
     </div>
 
@@ -84,6 +84,13 @@
 export default {
   data() {
     return {};
+  },
+  methods: {
+    handleGoA(Obj) {
+      this.$router.push({
+        path: "/" + Obj,
+      });
+    },
   },
 };
 </script>

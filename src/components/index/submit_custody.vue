@@ -4,8 +4,8 @@
     <div class="submit_sn1">申报已收悉</div>
     <div class="submit_sn1">将于10个工作日内回复，</div>
     <div class="submit_sn1">可点击 <span>申报进度</span>查看</div>
-    <div class="submit_btn mg90">查看申报进度</div>
-    <div class="submit_btn bgcolor1">返回首页</div>
+    <div class="submit_btn mg90" @click="handleGoA('declare_progress')">查看申报进度</div>
+    <div class="submit_btn bgcolor1" @click="handleGoA('')">返回首页</div>
     <div class="tipsn1">客服热线：0577-4874594</div>
 
   </div>
@@ -14,6 +14,13 @@
 export default {
   data() {
     return {};
+  },
+  methods: {
+    handleGoA(Obj) {
+      this.$router.push({
+        path: "/" + Obj,
+      });
+    },
   },
 };
 </script>

@@ -32,6 +32,7 @@
     <a class="more" v-else>没有更多了~</a>
     <!-- 弹框 -->
     <rzrypop></rzrypop>
+    <footer-bar />
   </div>
 </template>
 
@@ -39,61 +40,67 @@
 import bus from "../../assets/config/eventBus";
 import rzrypop from "./rzryPop/rzrypop.vue";
 import { XButton, ButtonTab, ButtonTabItem } from "vux";
-import {inde_url, url} from "../../assets/config/config";
+import { inde_url, url } from "../../assets/config/config";
 import wx from "weixin-js-sdk";
+import footerBar from "@/subComponent/footer";
 export default {
   components: {
     XButton,
     ButtonTab,
     ButtonTabItem,
     rzrypop,
+    footerBar,
   },
   data() {
     return {
       gypShow: true,
       rzrylist: [],
-      dataList:[],
-      pageNum:1,
-      hasNext:true,
-      headimg:undefined,
-      name:undefined
+      dataList: [],
+      pageNum: 1,
+      hasNext: true,
+      headimg: undefined,
+      name: undefined,
     };
   },
   methods: {
-    strtime(value){
-      var strdate = new Date(value.replace(/-/g, '/'))
+    strtime(value) {
+      var strdate = new Date(value.replace(/-/g, "/"));
       var year = strdate.getFullYear();
-      var month = strdate.getMonth()<9?"0"+(strdate.getMonth()+1):strdate.getMonth()+1;
-      var day = strdate.getDate()<10?"0"+strdate.getDate():strdate.getDate();
-      return year+"年"+month+"月"+day+"日";
+      var month =
+        strdate.getMonth() < 9
+          ? "0" + (strdate.getMonth() + 1)
+          : strdate.getMonth() + 1;
+      var day =
+        strdate.getDate() < 10 ? "0" + strdate.getDate() : strdate.getDate();
+      return year + "年" + month + "月" + day + "日";
     },
 
     showGYP(value) {
       console.log(bus);
-      bus.$emit("tcEvent", this.gypShow,value);
+      bus.$emit("tcEvent", this.gypShow, value);
     },
     wxAuthorization() {
       this.$axios
         .get(
           `/fapi/public/main/oauth?redirect_uri=${encodeURIComponent(
-            url+"/#/myRzry" //部署后需调整
+            url + "/#/myRzry" //部署后需调整
           )}&response_url=null`,
           {}
         )
         .then((res) => {
           console.log(res.data);
-          window.sessionStorage.setItem('res',res.data);//存入sessionStorage
+          window.sessionStorage.setItem("res", res.data); //存入sessionStorage
           //this.$cookies.set("res", res.data); //存入cookise
           window.location.href = res.data;
         });
     },
     persondata(cookie, fn) {
-      window.sessionStorage.setItem('code',this.$utils.getUrlKey("code"));
+      window.sessionStorage.setItem("code", this.$utils.getUrlKey("code"));
       // this.$cookies.set("code", this.$utils.getUrlKey("code"));
       // const code = this.$cookies.get("code");
       const that = this;
-      const code = window.sessionStorage.getItem('code');
-      console.log('code',code);
+      const code = window.sessionStorage.getItem("code");
+      console.log("code", code);
       this.$axios
         .get(`/fapi/public/main/invoke?code=${code}`, {})
         .then((res) => {
@@ -102,96 +109,116 @@ export default {
             fn && fn(false);
           } else {
             // console.log('res',res.data);
-            window.sessionStorage.setItem("token",res.data.wxscToken);
+            window.sessionStorage.setItem("token", res.data.wxscToken);
             // this.$cookies.set('token',res.data.wxscToken);
             const person = JSON.parse(res.data.userInfo); //用户全部信息
             that.headimg = person.headpic;
             that.name = person.nickname;
             console.log(person);
             console.log(JSON.parse(res.data.userInfo));
-            window.sessionStorage.setItem('person',res.data.userInfo);
+            window.sessionStorage.setItem("person", res.data.userInfo);
             //this.$cookies.set("person", person); //存入cookise
             fn && fn(true);
           }
         });
     },
-    async getDataList(){
+    async getDataList() {
       const self = this;
-      await self.$axios.post("/api/sys/yl/ordertree/list", {
-        "nowPage": self.pageNum,
-        "pageSize": 10,
-        "key":""
-      }, {
-        headers: {
-          "token":  window.sessionStorage.getItem('token')
-        }
-      }).then(function (res) {
-        if (res.data.msg && res.data.msg.indexOf("未登录")!=-1){
-          window.sessionStorage.removeItem("person");
-          if (!window.sessionStorage.getItem("person")) {
-            // if (!this.$cookies.get("person")) {
-            let code = self.$utils.getUrlKey("code");
-            self.persondata(code, (boolean) => {
-              if (boolean) {
-                //  code..
-                console.log("成功了");
-                self.$utils.wxgetsign(self,wx);//获取wx.config
-              } else {
-                //  验证 跳转
-                self.wxAuthorization();
-              }
-            });
-          } else {
-            //  验证 跳转
-            const that = this;
-            console.log("已有cookie");
-            const person = JSON.parse(window.sessionStorage.getItem('person'))
-            self.headimg = person.headpic;
-            self.name = person.nickname;
-            // that.headimg = this.$cookies.get("person").headpic;
-            // that.name = this.$cookies.get("person").nickname;
-            self.$utils.wxgetsign(that, wx); //获取wx.config
-            //this.wxAuthorization();
+      await self.$axios
+        .post(
+          "/api/sys/yl/ordertree/list",
+          {
+            nowPage: self.pageNum,
+            pageSize: 10,
+            key: "",
+          },
+          {
+            headers: {
+              token: window.sessionStorage.getItem("token"),
+            },
           }
-        }
-        // console.log(self.format(res.data.datas.publish_date));
-        const list = res.data.datas;
-        list.forEach(item=>{
-          if (!!!item.maintain_endTime){
-            item.maintain_endTime = "暂未种植"
-          }else {
-            item.maintain_endTime = self.format(item.maintain_endTime);
+        )
+        .then(function (res) {
+          if (res.data.msg && res.data.msg.indexOf("未登录") != -1) {
+            window.sessionStorage.removeItem("person");
+            if (!window.sessionStorage.getItem("person")) {
+              // if (!this.$cookies.get("person")) {
+              let code = self.$utils.getUrlKey("code");
+              self.persondata(code, (boolean) => {
+                if (boolean) {
+                  //  code..
+                  console.log("成功了");
+                  self.$utils.wxgetsign(self, wx); //获取wx.config
+                } else {
+                  //  验证 跳转
+                  self.wxAuthorization();
+                }
+              });
+            } else {
+              //  验证 跳转
+              const that = this;
+              console.log("已有cookie");
+              const person = JSON.parse(
+                window.sessionStorage.getItem("person")
+              );
+              self.headimg = person.headpic;
+              self.name = person.nickname;
+              // that.headimg = this.$cookies.get("person").headpic;
+              // that.name = this.$cookies.get("person").nickname;
+              self.$utils.wxgetsign(that, wx); //获取wx.config
+              //this.wxAuthorization();
+            }
           }
-          if (!!!item.maintain_startTime){
-            item.maintain_startTime = "暂未种植"
-          }else {
-            item.maintain_startTime = self.format(item.maintain_startTime);
-          }
+          // console.log(self.format(res.data.datas.publish_date));
+          const list = res.data.datas;
+          list.forEach((item) => {
+            if (!!!item.maintain_endTime) {
+              item.maintain_endTime = "暂未种植";
+            } else {
+              item.maintain_endTime = self.format(item.maintain_endTime);
+            }
+            if (!!!item.maintain_startTime) {
+              item.maintain_startTime = "暂未种植";
+            } else {
+              item.maintain_startTime = self.format(item.maintain_startTime);
+            }
             self.dataList.push(item);
-        })
-        console.log(self.dataList);
-        if (list.length == 0){
-          self.hasNext = false;
-        }
-      });
+          });
+          console.log(self.dataList);
+          if (list.length == 0) {
+            self.hasNext = false;
+          }
+        });
     },
-    add0(m){
-      return m<10?'0'+m:m
+    add0(m) {
+      return m < 10 ? "0" + m : m;
     },
     format(shijianchuo) {
       const self = this;
       //shijianchuo是整数，否则要parseInt转换
       var time = new Date(shijianchuo);
       var y = time.getFullYear();
-      var m = time.getMonth()+1;
+      var m = time.getMonth() + 1;
       var d = time.getDate();
       var h = time.getHours();
       var mm = time.getMinutes();
       var s = time.getSeconds();
-      return y+'-'+self.add0(m)+'-'+self.add0(d)+' '+self.add0(h)+':'+self.add0(mm)+':'+self.add0(s);
+      return (
+        y +
+        "-" +
+        self.add0(m) +
+        "-" +
+        self.add0(d) +
+        " " +
+        self.add0(h) +
+        ":" +
+        self.add0(mm) +
+        ":" +
+        self.add0(s)
+      );
     },
-    dingWei(x,y){
-      const point = {x,y};
+    dingWei(x, y) {
+      const point = { x, y };
       console.log(point);
     },
   },
@@ -261,7 +288,7 @@ export default {
         float: left;
         overflow: hidden;
         img {
-          height:100%
+          height: 100%;
         }
       }
       .text {
@@ -273,7 +300,7 @@ export default {
         p {
           margin-top: 5px;
           margin-bottom: 10px;
-          font-size:12px;
+          font-size: 12px;
         }
         .btn {
           width: 48%;

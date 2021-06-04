@@ -4,7 +4,10 @@ import VueRouter from "vue-router";
 /* import HelloWorld from '@/components/HelloWorld' */
 
 Vue.use(VueRouter);
-
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
 export default new VueRouter({
   mode: 'history',
   routes: [
@@ -15,7 +18,7 @@ export default new VueRouter({
     },
     {
       path: "/map",
-      name: "城市数林公众服务平台",
+      name: "城市数林公众服务平台地图",
       component: resolve => require(["@/components/rzry/index.vue"], resolve)
     },
     {
@@ -89,7 +92,7 @@ export default new VueRouter({
     // },
     {
       path: "/ph",
-      name: "排行排名",
+      name: "排行",
       component: resolve => require(["@/components/ph/ph.vue"], resolve)
     },
     {
@@ -225,3 +228,5 @@ export default new VueRouter({
   ],
   //mode: "history"
 });
+
+

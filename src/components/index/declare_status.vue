@@ -49,20 +49,20 @@
 
     </div>
     <!-- 审核失败 -->
-    <div class="verify_status verify_fail">
+    <!-- <div class="verify_status verify_fail">
       <div class="verify">审核未通过</div>
       <div class="verify_txt1">暂无适配场地~</div>
 
-    </div>
+    </div> -->
     <!-- 审核通过 -->
-    <div class="verify_status verify_complete">
+    <!-- <div class="verify_status verify_complete">
       <div class="verify">审核通过！</div>
       <div class="verify_txt1">已批复在三垟湿地公园开展温州设计集团认种认养项目，请知悉~</div>
 
       <div class="verify_txt2">审批人：某某某</div>
       <div class="verify_txt2">审批日期：2021年2月12日</div>
 
-    </div>
+    </div> -->
 
     <div class="per_blok">
       <!-- <div class="per_tip">

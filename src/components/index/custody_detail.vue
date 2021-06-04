@@ -48,7 +48,7 @@
       </div>
 
       <div class="per_blok">
-        <div class="per_btn">去监护</div>
+        <div class="per_btn" @click="handleGoA('go_custody')">去监护</div>
         <div class="per_btn per_btn3">不可监护</div>
       </div>
     </div>
@@ -59,6 +59,13 @@
 export default {
   data() {
     return {};
+  },
+  methods: {
+    handleGoA(Obj) {
+      this.$router.push({
+        path: "/" + Obj,
+      });
+    },
   },
 };
 </script>
